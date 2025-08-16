@@ -56,7 +56,6 @@ def cint(number):
       print(f'{red}Vui lòng chỉ nhập số')
 from datetime import date, datetime
 time=datetime.now().strftime("%H:%M:%S")
-from matplotlib.table import Table
 from pystyle import *
 data_machine = []
 today = date.today()
@@ -288,6 +287,7 @@ def getjob():
                     sleep(2)
             if g['status']==200:
                 job_success+=1
+                dem+=1
                 print(f'{red}[{trang}{dem}{red}][{lam}{time}{red}]{red}[{trang}{job_success}{red}/{startmaxjob}]{lam}FOLLOW|+{vang}{g["data"]["prices"]}')
                 startmaxjob+=1
                 jobloi=0
@@ -433,6 +433,7 @@ def getjob_follow():
                     pass
             if g['status']==200:
                 job_success+=1
+                dem+=1
                 print(f'{red}[{trang}{dem}{red}][{lam}{time}{red}]{red}[{trang}{job_success}{red}/{startmaxjob}]{lam}FOLLOW|+{vang}{g["data"]["prices"]}')
                 startmaxjob+=1
                 jobloi=0
@@ -452,6 +453,7 @@ def getjob_follow():
                         sleep(2)
                 if g['status']==200:
                     job_success+=1
+                    dem+=1
                     print(f'{red}[{trang}{dem}{red}][{lam}{time}{red}]{red}[{trang}{job_success}{red}/{startmaxjob}]{lam}FOLLOW|+{vang}{g["data"]["prices"]}')
                     startmaxjob+=1
                     jobloi=0
