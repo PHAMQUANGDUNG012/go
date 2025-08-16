@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 import json
 import random
 import platform
-from time import sleep
 try:
   import requests
 except ImportError:
@@ -25,6 +24,13 @@ except ImportError:
 
 
 
+
+import time
+from time import sleep
+import json,ast
+os.system('clear')
+ 
+init(autoreset=True)
 
 
 
@@ -54,41 +60,34 @@ def cint(number):
       return numbers
     except ValueError:
       print(f'{red}Vui lòng chỉ nhập số')
-from datetime import date, datetime
-time=datetime.now().strftime("%H:%M:%S")
-from pystyle import *
-data_machine = []
-today = date.today()
-now = datetime.now()
-thu = now.strftime("%A")
-ngay = now.strftime("%d")
-thang = now.strftime("%m")
-nam = now.strftime("%Y")
-red = "\033[1;31m"
-luc = "\033[1;32m"
-vang = "\033[1;33m"
-trang = "\033[1;37m"
-tim = "\033[1;35m"
-lam = "\033[1;36m"
-xduong = "\033[1;34m"
-thanh = f'{red}[{trang}</>{red}] {trang}=>'
-tentool="GOLIKE TIKTOK VIP"      
-def banner():
-  os.system("cls" if os.name == "nt" else "clear")
-  print (f'''
-{lam}██████╗   ██████╗  ██████╗  ████████╗ ██████╗  ██████╗ ██╗     
-{trang}██ ╔═██╗ ██╔═══██╗ ██╔══██╗ ╚══██╔══╝██╔═══██╗██╔═══██╗██║     
-{lam}██████╔╝ ██║   ██║ ██║  ██║    ██║   ██║   ██║██║   ██║██║     
-{trang}██╔═══╝  ██║▄▄ ██║ ██║  ██║    ██║   ██║   ██║██║   ██║██║     
-{lam}██║      ╚██████╔╝ ██████╔╝    ██║   ╚██████╔╝╚██████╔╝███████╗
-{trang}╚═╝       ╚══▀▀═╝  ╚═════╝     ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝
-{trang}-----------------------------------------------------------------
-{thanh} {luc}Admin{trang} : {vang}Phạm Quang Dũng 
-{thanh} {luc}Zalo{trang} : {red}https://zalo.me/0336502026
-{thanh} {luc}Ngày Hôm Nay{trang} : {red}{ngay}/{thang}/{nam}
-{thanh} {luc}Giờ Hoạt Động{trang} : {red}{time}
-{thanh} {luc}Đang Sử Dụng{trang} : {vang}{tentool}
-{trang}----------------------------------------------------------------- ''')
+
+
+
+
+
+
+def changetoken(red,green,white):
+  if os.path.exists("cache_golike_auth.txt"):
+    text=f'''{green}BẠN MUỐN DÙNG AUTH CŨ HAY ĐỔI AUTH
+{red}[{white}1{red}] ĐỔI AUTH
+{red}[{white}2{red}] DÙNG AUTH CŨ'''
+    pr3(text)
+    changetoken=cint(f'{red}NHẬP LỰA CHỌN: {green}')
+    print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    if changetoken==1:
+      file_name = 'cache_golike_auth.txt'
+      if os.path.exists(file_name):
+          os.remove(file_name)
+    else:
+      pass
+def banner(red,green,blue,yellow,cyan,pink):
+  text=f'''
+'''
+  pr3(text)
+
+
+
+
 def bes4(url):
   html_source = requests.get(url).text
   soup = BeautifulSoup(html_source, 'html.parser')
@@ -98,30 +97,19 @@ def bes4(url):
       return text
   else:
       print("Không tìm thấy thẻ meta với thuộc tính property='og:description'")
-def changetoken():
-  if os.path.exists("golike.txt"):
-    text=f'''{thanh} {luc}Nhập {red}[{vang}1{red}] {luc}ĐỂ ĐỔI TÀI KHOẢN MỚI
-{thanh} {luc}Nhập {red}[{vang}2{red}] {luc}DÙNG TÀI KHOẢN CŨ '''
-    pr3(text)
-    print(f'{trang}-----------------------------------------------------------------')
-    changetoken=cint(f'{thanh} {luc}NHẬP LỰA CHỌN : {trang}')
-    if changetoken==1:
-      file_name = 'golike.txt'
-      if os.path.exists(file_name):
-          os.remove(file_name)
-    else:
-      pass
-def checkauth():
+
+
+
+
+def checkauth(red, blue, green, yellow, cyan, magenta, orange, xanhnhat, xduong, pink):
     import cloudscraper
     scraper = cloudscraper.create_scraper()
 
     while True:
-        if not os.path.exists("golike.txt"):
-            banner()
-            auth = str(input(f'{thanh} {luc}NHẬP AUTHORIZATION {trang}: '))
-
+        if not os.path.exists("cache_golike_auth.txt"):
+            auth = str(input(f'~[+]{red}NHẬP AUTH:{green} '))
         else:
-            with open('golike.txt') as f:
+            with open('cache_golike_auth.txt') as f:
                 auth = f.read().strip()
 
         headers = {
@@ -133,7 +121,7 @@ def checkauth():
         try:
             response = scraper.get('https://gateway.golike.net/api/tiktok-account', headers=headers)
         except Exception as e:
-            print(f"{thanh} {red}Không thể kết nối tới API")
+            print(f"{red}❌ Không thể kết nối tới API: {e}")
             continue
 
         if response.status_code == 200:
@@ -141,14 +129,14 @@ def checkauth():
                 try:
                     check = response.json()
                 except json.JSONDecodeError:
-                    print(f"{thanh} {red}Phản hồi không hợp lệ (không phải JSON):")
+                    print(f"{red}❌ Phản hồi không hợp lệ (không phải JSON):")
                     print(response.text)
                     continue
             else:
-                print(f"{thanh} {red}Phản hồi rỗng. Có thể AUTH không đúng.")
+                print(f"{red}❌ Phản hồi rỗng. Có thể AUTH không đúng.")
                 continue
         else:
-            print(f"{thanh} {red}AUTH sai hoặc bị từ chối (status code: {response.status_code})")
+            print(f"{red}❌ AUTH sai hoặc bị từ chối (status code: {response.status_code})")
             continue
 
         if check.get('status') == 200:
@@ -163,7 +151,7 @@ def checkauth():
                 report_response = scraper.get('https://gateway.golike.net/api/statistics/report', headers=hea)
                 data = report_response.json()
             except Exception:
-                print(f"{thanh} {red} Lỗi khi lấy thống kê.")
+                print(f"{red}❌ Lỗi khi lấy thống kê.")
                 continue
 
             total_pending_coin = sum(
@@ -171,55 +159,54 @@ def checkauth():
                 if isinstance(value, dict) and 'pending_coin' in value
             )
             xht = data.get('current_coin', 0)
-            banner()
-            pr(f'{thanh} {luc}TÊN TÀI KHOẢN : {trang}{name}')
-            pr(f'{thanh} {luc}SỐ DƯ HIỆN TẠI : {vang}{xht}đ')
-            pr(f'{thanh} {luc}CHỜ DUYỆT : {vang}{total_pending_coin}đ')
+
+            pr(f'{red}TÊN TÀI KHOẢN: {green}{name}')
+            pr(f'{green}${red} HIỆN TẠI :{green}{xht}đ')
+            pr(f'{green}${red} CHỜ DUYỆT:{green}{total_pending_coin}đ')
 
             nicknames = [item['nickname'] for item in check['data'] if 'nickname' in item]
-            print(f'{trang}-----------------------------------------------------------------')
-            pr(f'{thanh} {luc}ACC CÓ TRONG TÀI KHOẢN')
+            print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+            pr(f'~[+]{red}SELECT {green}ACC CHẠY NHIỆM VỤ')
             for i, nickname in enumerate(nicknames, start=1):
                 globals()[f'{i}'] = nickname
-                pr(f'{thanh} {luc}Nhập {red}[{vang}{i}{red}] {trang}: {nickname}')
+                pr(f'{red}[{green}{i}{red}]: {nickname}')
 
-            with open("golike.txt", "w") as f:
+            with open("cache_golike_auth.txt", "w") as f:
                 f.write(auth)
 
             return auth, check
         else:
-            pr(f'{thanh}{luc} AUTH KHÔNG HỢP LỆ. VUI LÒNG NHẬP LẠI.')
+            pr(f'{red}❌ AUTH KHÔNG HỢP LỆ. VUI LÒNG NHẬP LẠI.')
 
 
 
-def get_id_from_nickname_number():
+def get_id_from_nickname_number(ranmau,check,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink):
   while True :
-    print(f'{trang}-----------------------------------------------------------------')
-    user_input=input(f'{thanh} {luc}CHỌN ACC TIKTOK MUỐN CHẠY JOB :{trang} ')
+    
+    user_input=input(f'~[+]{random.choice(ranmau)}>{random.choice(ranmau)}>{random.choice(ranmau)}> {green}CHỌN ACC TIKTOK MUỐN CHẠY JOB:{green} ')
     try:
       n = int(user_input)
       if 'data' in check and len(check['data']) >= n:
           idtiktok = check['data'][n-1]['id']
           if idtiktok :
-              text=f"{thanh} {luc}ID CỦA NICKNAME SỐ {n} LÀ : {trang}{idtiktok}"
-              banner()
+              text=f"{red}ID CỦA NICKNAME SỐ {n} LÀ: {green}{idtiktok}"
               pr(text)
-              print(f'{trang}-----------------------------------------------------------------')
+              print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
               return idtiktok 
           else:
-              text=f"{thanh}{luc}KHÔNG TÌM THẤY NICKNAME TƯƠNG ỨNG."
+              text=f"{red}KHÔNG TÌM THẤY NICKNAME TƯƠNG ỨNG."
               pr(text)
       else:
           continue 
     except ValueError:
-          pr(f"{thanh} {luc}VUI LÒNG CHỈ NHẬP SỐ.")
+          pr(f"{red}VUI LÒNG CHỈ NHẬP SỐ.")
           continue 
 
 
 
 
 
-def getjob():
+def getjob(maxjob,delay,auth,idtiktok,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink):
     startmaxjob=1
     job_success=0
     hea={
@@ -242,9 +229,10 @@ def getjob():
         object_id=a['lock']['object_id']
         os.system(f'termux-open-url {link}')
         for k in range(delay,-1,-1):
-            print(f'{thanh}:{red}[{luc}{job_success}{trang}/{red}{startmaxjob}] {luc}LẤY NHIỆM VỤ MỚI SAU {red}[{trang}{k}s{red}]',end='\r')
+            mau=random.choice(ranmau)
+            print(f'{green}SUCCESS:{red}[{job_success}/{startmaxjob}]{random.choice(ranmau)}LOADING{random.choice(ranmau)}>>{yellow}NVỤ MỚI SAU{random.choice(ranmau)}>>{random.choice(ranmau)}[{k}s]',end='\r')
             sleep(1)
-        print(f'{thanh}{luc}Đang kiểm tra hành động...',end='\r')
+        print(f'{green}Đang kiểm tra hành động...',end='\r')
         headers = {
             'authorization': auth,
         't':	'VFZSWk5VOUVVVEJQUkZGNFRXYzlQUT09',
@@ -267,16 +255,15 @@ def getjob():
                 pass
         if g['status']==200:
             job_success+=1
-            dem+=1
-            print(f'{red}[{trang}{dem}{red}][{lam}{time}{red}]{red}[{trang}{job_success}{red}/{startmaxjob}]{lam}FOLLOW|+{vang}{g["data"]["prices"]}')
+            print(f'{green}SUCCESS:{red}[{job_success}/{startmaxjob}]{cyan}[{time()}]|{random.choice(ranmau)}SUCCESS|{green}FOLLOW|+{g["data"]["prices"]}')
             startmaxjob+=1
             jobloi=0
             if startmaxjob == maxjob+1:
-                print(f'{thanh} {luc}ĐÃ ĐẠT MAX JOB. ')
+                print(f'~[+]{pink}ĐÃ ĐẠT MAX JOB. ')
                 return
 
         else:
-            print(f'{luc}Đang kiểm tra lại hành động...',end="\r")
+            print(f'{green}Đang kiểm tra lại hành động...',end="\r")
             sleep(2)
             while True:
                 try:
@@ -287,12 +274,11 @@ def getjob():
                     sleep(2)
             if g['status']==200:
                 job_success+=1
-                dem+=1
-                print(f'{red}[{trang}{dem}{red}][{lam}{time}{red}]{red}[{trang}{job_success}{red}/{startmaxjob}]{lam}FOLLOW|+{vang}{g["data"]["prices"]}')
+                print(f'{green}SUCCESS:{red}[{job_success}/{startmaxjob}]{cyan}[{time()}]|{random.choice(ranmau)}SUCCESS|{green}FOLLOW|+{g["data"]["prices"]}')
                 startmaxjob+=1
                 jobloi=0
                 if startmaxjob == maxjob+1:
-                    print(f'{thanh} {luc}ĐÃ ĐẠT MAX JOB. ')
+                    print(f'~[+]{pink}ĐÃ ĐẠT MAX JOB. ')
                     return
             else:
                 print(f'{red}Đang bỏ qua nhiệm vụ...',end='\r')
@@ -330,7 +316,7 @@ def getjob():
                 startmaxjob+=1
                 jobloi+=1
                 if startmaxjob == maxjob+1:
-                    print(f'{thanh} {luc}ĐÃ ĐẠT MAX JOB')
+                    print(f'~[+]{green}ĐÃ ĐẠT MAX JOB')
                     return
                 elif jobloi==15:
                     select=input(f'{red}Lỗi nhiều ,Bạn có muốn đổi nick?(y/n):')
@@ -340,14 +326,14 @@ def getjob():
                         nicknames = [item['nickname'] for item in check['data'] if 'nickname' in item]
                         for i, nickname in enumerate(nicknames, start=1):
                             globals()[f'{i}'] = nickname
-                        print(f'{trang}-----------------------------------------------------------------')
-                        text=f'{thanh}  {luc} CHỌN ACC CHẠY NHIỆM VỤ '
+                        print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+                        text=f'~[+]{red}SELECT {green}ACC CHẠY NHIỆM VỤ '
                         pr(text)
                         # In giá trị của các biến
                         for i, nickname in enumerate(nicknames, start=1):
-                            text=f'{red}[{luc}{i}{red}]: {globals()[f"{i}"]}'
+                            text=f'{red}[{green}{i}{red}]: {globals()[f"{i}"]}'
                             pr(text)
-                        idtiktok = get_id_from_nickname_number()
+                        idtiktok = get_id_from_nickname_number(ranmau,check,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)
                         jobloi=0
 
       except:
@@ -356,13 +342,13 @@ def getjob():
 
   
 
-def getjob_follow():
+def getjob_follow(maxjob,delay,auth,idtiktok,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink):
     startmaxjob=1
     job_success=0
     jobloi=0
     hea={
-'Authorization':auth,
-'t':'VFZSWk5VOUVVVEJQUkZGNFRXYzlQUT09',
+'Authorization':	auth,
+'t':	'VFZSWk5VOUVVVEJQUkZGNFRXYzlQUT09',
 'User-Agent':"Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_5 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8L1 Safari/6533.18.5"
 }
     while True:
@@ -408,9 +394,10 @@ def getjob_follow():
         else:  
             os.system(f'termux-open-url {link}')
             for k in range(delay,-1,-1):
-                print(f'{thanh}:{red}[{luc}{job_success}{trang}/{red}{startmaxjob}] {luc}LẤY NHIỆM VỤ MỚI SAU {red}[{trang}{k}s{red}]',end='\r')
+                mau=random.choice(ranmau)
+                print(f'{green}SUCCESS:{red}[{job_success}/{startmaxjob}]{random.choice(ranmau)}LOADING{random.choice(ranmau)}>>{yellow}NVỤ MỚI SAU{random.choice(ranmau)}>>{random.choice(ranmau)}[{k}s]',end='\r')
                 sleep(1)
-            print(f'{luc}Đang kiểm tra hành động...',end='\r')
+            print(f'{green}Đang kiểm tra hành động...',end='\r')
             headers = {
                 'authorization': auth,
             't':	'VFZSWk5VOUVVVEJQUkZGNFRXYzlQUT09',
@@ -433,16 +420,15 @@ def getjob_follow():
                     pass
             if g['status']==200:
                 job_success+=1
-                dem+=1
-                print(f'{red}[{trang}{dem}{red}][{lam}{time}{red}]{red}[{trang}{job_success}{red}/{startmaxjob}]{lam}FOLLOW|+{vang}{g["data"]["prices"]}')
+                print(f'{green}SUCCESS:{red}[{job_success}/{startmaxjob}]{cyan}[{time()}]|{random.choice(ranmau)}SUCCESS|{green}FOLLOW|+{g["data"]["prices"]}')
                 startmaxjob+=1
                 jobloi=0
                 if startmaxjob == maxjob+1:
-                    print(f'{thanh} {luc}ĐÃ ĐẠT MAX JOB. ')
+                    print(f'~[+]{pink}ĐÃ ĐẠT MAX JOB. ')
                     return
 
             else:
-                print(f'{luc}Đang kiểm tra lại hành động...',end="\r")
+                print(f'{green}Đang kiểm tra lại hành động...',end="\r")
                 sleep(2)
                 while True:
                     try:
@@ -453,12 +439,11 @@ def getjob_follow():
                         sleep(2)
                 if g['status']==200:
                     job_success+=1
-                    dem+=1
-                    print(f'{red}[{trang}{dem}{red}][{lam}{time}{red}]{red}[{trang}{job_success}{red}/{startmaxjob}]{lam}FOLLOW|+{vang}{g["data"]["prices"]}')
+                    print(f'{green}SUCCESS:{red}[{job_success}/{startmaxjob}]{cyan}[{time()}]|{random.choice(ranmau)}SUCCESS|{green}FOLLOW|+{g["data"]["prices"]}')
                     startmaxjob+=1
                     jobloi=0
                     if startmaxjob == maxjob+1:
-                        print(f'{thanh} {luc}ĐÃ ĐẠT MAX JOB. ')
+                        print(f'~[+]{pink}ĐÃ ĐẠT MAX JOB. ')
                         return
                 else:
                     print(f'{red}Đang bỏ qua nhiệm vụ...',end='\r')
@@ -496,99 +481,147 @@ def getjob_follow():
                     startmaxjob+=1
                     jobloi+=1
                     if startmaxjob == maxjob+1:
-                        print(f'{thanh} {luc}ĐÃ ĐẠT ĐỦ JOB ')
+                        print(f'~[+]{green}ĐÃ ĐẠT MAX JOB')
                         return
                     elif jobloi==15:
-                        select=input(f'{thanh} {red}Lỗi nhiều , Bạn có muốn đổi nick?(y/n):')
+                        select=input(f'{red}Lỗi nhiều ,Bạn có muốn đổi nick?(y/n):')
                         if select.lower() == 'n':
                             pass
                         else:
                             nicknames = [item['nickname'] for item in check['data'] if 'nickname' in item]
                             for i, nickname in enumerate(nicknames, start=1):
                                 globals()[f'{i}'] = nickname
-                            print(f'{trang}-----------------------------------------------------------------')
-                            text=f'{thanh} {luc}CHỌN ACC CHẠY NHIỆM VỤ '
+                            print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+                            text=f'~[+]{red}SELECT {green}ACC CHẠY NHIỆM VỤ '
                             pr(text)
                             # In giá trị của các biến
                             for i, nickname in enumerate(nicknames, start=1):
-                                text=f'{red}[{luc}{i}{red}]: {globals()[f"{i}"]}'
+                                text=f'{red}[{green}{i}{red}]: {globals()[f"{i}"]}'
                                 pr(text)
-                            idtiktok = get_id_from_nickname_number()
+                            idtiktok = get_id_from_nickname_number(ranmau,check,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)
                             jobloi=0
 
       except:
           print(f'{red}Đang nhận lại nhiệm vụ...',end='\r')
           sleep(2)
+
+
+  
+  
+  
+#biến
+#green='\033[38;5;10m'
+blue='\033[38;5;12m'
+cyan='\033[38;5;14m'
+white='\033[1;39m'
+magenta='\033[38;5;5m'
+orange='\033[38;5;202m'
+xanhnhat = "\033[1;36m"
+red = "\033[1;31m"
+green = "\033[1;32m"
+yellow = "\033[1;33m"
+xduong = "\033[1;34m"
+pink = "\033[1;35m"
+trang = "\033[1;39m"
+whiteb="\033[1;39m"
+redb="\033[1;31m"
+end='\033[0m'
+ranmau=(red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)
+
+
+
+
+
+       
+
+
+
+
+
+
+
+
+            
+
+
 while True:
-  banner()
-  changetoken() 
-  auth,check =checkauth()
-  if not os.path.exists("setting.txt"):
-      idtiktok =get_id_from_nickname_number()
-      print(f'''{thanh} {luc}Nhập {red}[{vang}1{red}] {luc}LỌC NHIỆM VỤ TYM
-{thanh} {luc}Nhập {red}[{vang}2{red}] {luc}KHÔNG LỌC NHIỆM VỤ TYM ''')
-      print(f'{trang}-----------------------------------------------------------------')
-      select_job=cint(f'{thanh} {luc}NHẬP LỰA CHỌN :{trang}')
-      delay =cint(f'{thanh} {luc}NHẬP DELAY : {trang}')
-      maxjob= cint(f'{thanh} {luc}NHẬP MAX JOB : {trang}')
+  banner(red,green,blue,yellow,cyan,pink)
+  current_time = datetime.now()
+  time_key = current_time.strftime("%F")
+  print(f'{pink}VERSION 1.5.0')
+  changetoken(red,green,white) 
+  auth,check =checkauth(red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)
+  if not os.path.exists("setting_golike.txt"):
+      idtiktok =get_id_from_nickname_number(ranmau,check,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)
+      print(f'''~[+]{red}BẠN CÓ MUỐN LỌC JOB LIKE KHÔNG:
+{red}[1]:{green}CÓ
+{red}[2]:{green}KHÔNG''')
+      select_job=cint(f'{red}NHẬP LỰA CHỌN:{green}')
+      delay =cint(f'~[+]{red}NHẬP DELAY: {green}')
+      maxjob= cint(f'~[+]{red}NHẬP MAX JOB: {green}')
       setting={
         "loaijob":select_job,
         "delay":delay,
         "maxjob":maxjob
       }
-      file = open("setting.txt", "a")  # Append mode
+
+      file = open("setting_golike.txt", "a")  # Append mode
       file.write(json.dumps(setting))
       file.close()
-      print(f'{trang}-----------------------------------------------------------------')
+      print(f'{cyan}KHỞI CHẠY NHIỆM VỤ') 
+      print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
       sleep(1)
       if select_job==1:
-        getjob_follow()
+        getjob_follow(maxjob,delay,auth,idtiktok,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)
       else:
-        getjob()   
+        getjob(maxjob,delay,auth,idtiktok,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)   
           
                 
   else: 
-        idtiktok = get_id_from_nickname_number()
-        select_setting=input(f'{thanh} {luc}BẠN CÓ MUỐN DÙNG SETTING CŨ [CÓ (y) | KHÔNG (n)]{trang}:' )
+        idtiktok = get_id_from_nickname_number(ranmau,check,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)
+        select_setting=input(f'{green}Bạn có muốn sử dụng setting cũ không?[y/n]{cyan}:' )
         if select_setting.lower() == 'n':
-            os.remove('setting.txt')
-            idtiktok =get_id_from_nickname_number()
-            print(f'''{thanh} {luc}Nhập {red}[{vang}1{red}] {luc}CÓ
-{thanh} {luc}Nhập {red}[{vang}2{red}] {luc}KHÔNG''')
-            select_job=cint(f'{thanh} {luc}NHẬP LỰA CHỌN :{trang}')
-            delay =cint(f'{thanh} {luc}NHẬP DELAY : {trang}')
-            maxjob= cint(f'{thanh} {luc}NHẬP MAX JOB : {trang}')
+            os.remove('setting_golike.txt')
+            idtiktok =get_id_from_nickname_number(ranmau,check,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)
+            print(f'''~[+]{red}BẠN CÓ MUỐN LỌC JOB LIKE KHÔNG:
+{red}[1]:{green}CÓ
+{red}[2]:{green}KHÔNG''')
+            select_job=cint(f'{red}NHẬP LỰA CHỌN:{green}')
+            delay =cint(f'~[+]{red}NHẬP DELAY: {green}')
+            maxjob= cint(f'~[+]{red}NHẬP MAX JOB: {green}')
             setting={
               "loaijob":select_job,
               "delay":delay,
               "maxjob":maxjob
             }
-            file = open("setting.txt", "a")  # Append mode
+            file = open("setting_golike.txt", "a")  # Append mode
             file.write(json.dumps(setting))
             file.close()
 
-            print(f'{trang}-----------------------------------------------------------------')
+            print(f'{cyan}KHỞI CHẠY NHIỆM VỤ') 
+            print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
             sleep(1)
             if select_job==1:
-              getjob_follow()
+              getjob_follow(maxjob,delay,auth,idtiktok,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)
             else:
-              getjob()   
+              getjob(maxjob,delay,auth,idtiktok,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)   
                 
                       
         else:
           try:
-              with open("setting.txt", "r") as file:
+              with open("setting_golike.txt", "r") as file:
                 data_txt=file.read()
                 data_json = json.loads(data_txt)
                 select_job = int(data_json.get('loaijob'))
                 delay = int(data_json.get('delay'))
                 maxjob= int(data_json.get('maxjob'))
-                print(f'{trang}-----------------------------------------------------------------')
+                print(f'{cyan}KHỞI CHẠY NHIỆM VỤ') 
+                print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
                 sleep(1)
                 if select_job==1:
-                  getjob_follow()
+                  getjob_follow(maxjob,delay,auth,idtiktok,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)
                 else:
-                  getjob()
+                  getjob(maxjob,delay,auth,idtiktok,red,blue,green,yellow,cyan,magenta,orange,xanhnhat,xduong,pink)
           except json.JSONDecodeError:
               print("Dữ liệu không hợp lệ. Vui lòng kiểm tra lại định dạng JSON trong tệp.")
           
