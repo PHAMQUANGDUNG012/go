@@ -332,12 +332,12 @@ while True:
         continue
 
     job_price = nhanjob["data"]["price_per_after_cost"]
-    price_color = "\033[1;32m" if job_price == 20 else "\033[1;31m"
-    price_symbol = "=" if job_price == 20 else "≠"
-    price_display = f"{job_price} {price_color}{price_symbol}\033[0m 20"
+    price_color = "\033[1;32m" if job_price == 40 else "\033[1;31m"
+    price_symbol = "=" if job_price == 40 else "<"
+    price_display = f"{job_price} {price_color}{price_symbol}\033[0m 40"
     display_dashboard(account_nickname, price_display, dem, tong, current_link, current_status, "")
 #
-    if job_price != 20:
+    if job_price != 40:
         current_status = "Bỏ qua job"
         display_dashboard(account_nickname, price_display, dem, tong, current_link, current_status, "")
         baoloi(ads_id, object_id, account_id, job_type)
