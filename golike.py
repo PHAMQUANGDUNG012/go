@@ -11,6 +11,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich import box
 import sys
+from time import sleep
 init() 
 from datetime import date, datetime
 time=datetime.now().strftime("%H:%M:%S")
@@ -191,11 +192,11 @@ def baoloi(ads_id, object_id, account_id, loai):
 def open_tiktok_link(link):
     try:
         os.system(f"termux-open-url '{link}'")
-        time.sleep(2)
+        sleep(2)
     except Exception:
         try:
             webbrowser.open(link)
-            time.sleep(2)
+            sleep(2)
         except Exception as e:
             print(f"\033[1;31mKhông mở được link tự động: {e}")
             print(f"\033[1;33mVui lòng mở link : {link}")
@@ -203,11 +204,11 @@ def open_tiktok_link(link):
 def countdown_delay(seconds, nickname, price_str, job_count, total, link, status):
     for i in range(seconds, -1, -1):
         display_dashboard(nickname, price_str, job_count, total, link, status, f"{i}...")
-        time.sleep(1)
+        sleep(1)
     display_dashboard(nickname, price_str, job_count, total, link, status, "")
 
 def display_dashboard(nickname, price_str, job_count, total, link, status, delay_str):
-    os.system('clear')  # Clear terminal
+    os.system("cls" if os.name == "nt" else "clear")
 
     table = Table(title=" PHẠM QUANG DŨNG GOLIKE TIKTOK", box=box.ROUNDED, border_style="bold white")
     table.add_column("📌 MỤC LỤC", justify="right", style="bold cyan")
@@ -272,7 +273,7 @@ current_link = "N/A"
 price_display = "Chưa check"
 current_status = "Khởi động"
 
-os.system('clear')
+os.system("cls" if os.name == "nt" else "clear")
 
 while True:
     if checkdoiacc >= doiacc:
@@ -306,12 +307,12 @@ while True:
         if nhanjob and nhanjob.get("status") == 200 and nhanjob["data"].get("link") and nhanjob["data"].get("object_id"):
             break
         retry_count += 1
-        time.sleep(2)
+        sleep(2)
 
     if not nhanjob or retry_count >= max_retries:
         current_status = "Không lấy được job"
         display_dashboard(account_nickname, price_display, dem, tong, current_link, current_status, "")
-        time.sleep(1)
+        sleep(1)
         checkdoiacc += 1
         continue
 
@@ -319,15 +320,14 @@ while True:
     current_link = nhanjob["data"]["link"]
     object_id = nhanjob["data"]["object_id"]
     job_type = nhanjob["data"]["type"]
-
-    time.sleep(3)  
+    sleep(3)
 # 3 giây check giá
     if "price_per_after_cost" not in nhanjob["data"]:
         price_display = "Không có giá"
         current_status = "Bỏ qua job"
         display_dashboard(account_nickname, price_display, dem, tong, current_link, current_status, "")
         baoloi(ads_id, object_id, account_id, job_type)
-        time.sleep(1)
+        sleep(1)
         current_link = "N/A"
         continue
 
@@ -341,7 +341,7 @@ while True:
         current_status = "Bỏ qua job"
         display_dashboard(account_nickname, price_display, dem, tong, current_link, current_status, "")
         baoloi(ads_id, object_id, account_id, job_type)
-        time.sleep(1)
+        sleep(1)
         current_link = "N/A"
         price_display = "Chưa check"
         continue
@@ -350,7 +350,7 @@ while True:
         current_status = "Bỏ qua job"
         display_dashboard(account_nickname, price_display, dem, tong, current_link, current_status, "")
         baoloi(ads_id, object_id, account_id, job_type)
-        time.sleep(1)
+        sleep(1)
         current_link = "N/A"
         price_display = "Chưa check"
         continue
@@ -362,7 +362,7 @@ while True:
 
     current_status = "Nhận tiền"
     display_dashboard(account_nickname, price_display, dem, tong, current_link, current_status, "")
-    time.sleep(0.5)
+    sleep(0.5)
 #nhận 5 lần ko dc bỏ job 
     max_attempts = 5
     attempts = 0
@@ -372,7 +372,7 @@ while True:
         if nhantien and (nhantien.get("status") == 200 or nhantien.get("status") == "already_completed"):
             break
         attempts += 1
-        time.sleep(1)
+        sleep(1)
 
     if nhantien and nhantien.get("status") == 200:
         dem += 1
@@ -382,18 +382,18 @@ while True:
         tong += tien
         current_status = "Thành Công"
         display_dashboard(account_nickname, price_display, dem, tong, current_link, current_status, "")
-        time.sleep(0.7)
+        sleep(0.7)
         checkdoiacc = 0
     elif nhantien and nhantien.get("status") == "already_completed":
         current_status = "Bỏ qua job vì đã nhận"
         display_dashboard(account_nickname, price_display, dem, tong, current_link, current_status, "")
         baoloi(ads_id, object_id, account_id, job_type)
-        time.sleep(1)
+        sleep(1)
     else:
         current_status = "Nhận tiền lỗi"
         display_dashboard(account_nickname, price_display, dem, tong, current_link, current_status, "")
         baoloi(ads_id, object_id, account_id, job_type)
-        time.sleep(1)
+        sleep(1)
         checkdoiacc += 1
 
     current_link = "N/A"
