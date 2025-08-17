@@ -12,64 +12,87 @@ from rich.panel import Panel
 from rich import box
 import sys
 init() 
-os.system('clear')
+from datetime import date, datetime
+time=datetime.now().strftime("%H:%M:%S")
+data_machine = []
+today = date.today()
+now = datetime.now()
+thu = now.strftime("%A")
+ngay = now.strftime("%d")
+thang = now.strftime("%m")
+nam = now.strftime("%Y")
+red = "\033[1;31m"
+luc = "\033[1;32m"
+vang = "\033[1;33m"
+trang = "\033[1;37m"
+tim = "\033[1;35m"
+lam = "\033[1;36m"
+xduong = "\033[1;34m"
+thanh = f'{red}[{trang}</>{red}] {trang}=> '
+tentool="GOLIKE TIKTOK VIP"
+def banner():
+  os.system("cls" if os.name == "nt" else "clear")
+  print (f'''{lam}██████╗   ██████╗  ██████╗  ████████╗ ██████╗  ██████╗ ██╗     
+{trang}██ ╔═██╗ ██╔═══██╗ ██╔══██╗ ╚══██╔══╝██╔═══██╗██╔═══██╗██║     
+{lam}██████╔╝ ██║   ██║ ██║  ██║    ██║   ██║   ██║██║   ██║██║     
+{trang}██╔═══╝  ██║▄▄ ██║ ██║  ██║    ██║   ██║   ██║██║   ██║██║     
+{lam}██║      ╚██████╔╝ ██████╔╝    ██║   ╚██████╔╝╚██████╔╝███████╗
+{trang}╚═╝       ╚══▀▀═╝  ╚═════╝     ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝
+{trang}-----------------------------------------------------------------
+{thanh}{luc}Admin{trang} : {vang}Phạm Quang Dũng 
+{thanh}{luc}Zalo{trang} : {red}https://zalo.me/0336502026
+{thanh}{luc}Ngày Hôm Nay{trang} : {red}{ngay}/{thang}/{nam}
+{thanh}{luc}Giờ Hoạt Động{trang} : {red}{time}
+{thanh}{luc}Đang Sử Dụng{trang} : {vang}{tentool}
+{trang}-----------------------------------------------------------------''')
 init(autoreset=True)
 console = Console()
 # Nhập auth
 try:
     with open("Auth.txt", "x"):
         pass
-    with open("token.txt", "x"):
-        pass
 except:
     pass
 
 try:
-    with open("Auth.txt", "r") as Auth, open("token.txt", "r") as t:
+    with open("Auth.txt", "r") as Auth:
         author = Auth.read().strip()
-        token = t.read().strip()
 except:
-    print("\033[1;31m Hãy tạo file Auth.txt và token.txt!\n")
+    print("\033[1;31m Hãy tạo file Auth.txt\n")
     sys.exit(1)
-
-os.system('clear')
-
-print(f"[1] Sử dụng Authorization và Token hiện tại")
-print(f"[2] Nhập Authorization và Token mới")
-select = input(f"Nhập lựa chọn (1 hoặc 2): \033[1;33m").strip()
+banner()
+print(f"{thanh}{luc}Nhập {red}[{vang}1{red}] {luc}Để Authorization hiện tại")
+print(f"{thanh}{luc}Nhập {red}[{vang}2{red}] {luc}Để Nhập Authorization mới")
+select = input(f"{thanh}{luc}Lựa Chọn Của Bạn Là : {trang}").strip()
 
 if select == "1":
-    if not author or not token:
-        print("\033[1;31mCredential files are empty!\n")
+    if not author :
+        print(f"{red}lỗi hãy nhập lại\n")
         sys.exit(1)
-    print(f"\033[1;32mSử dụng Authorization và Token hiện tại\n")
+    print(f"{luc}ĐANG SỬ DỤNG LẠI AUTHORIZATION CŨ\n")
 elif select == "2":
-    author = input("NHẬP AUTHORIZATION GOLIKE: ").strip()
-    token = input("NHẬP TOKEN (T CỦA GOLIKE): ").strip()
+    banner()
+    author = input(f"{thanh}{luc}NHẬP AUTHORIZATION GOLIKE: ").strip()
     try:
-        with open("Auth.txt", "w") as Auth, open("token.txt", "w") as t:
+        with open("Auth.txt", "w") as Auth:
             Auth.write(author)
-            t.write(token)
     except:
-        print("\033[1;31m Hãy tạo file Auth.txt và token.txt!\n")
+        print("\033[1;31m Hãy tạo file Auth.txt !\n")
         sys.exit(1)
 else:
     print("\033[1;31mLựa chọn không hợp lệ! Vui lòng chọn 1 hoặc 2.")
     sys.exit(1)
+banner()
 
-os.system('clear')
-print("                     DANH SÁCH ACC TIKTOK               ")
-print(f"{Fore.MAGENTA}===================================")
-
+print(f"{thanh}{luc}DANH SÁCH ACC CÓ TRONG TÀI KHOẢN")
 headers = {
     'Accept': 'application/json, text/plain, */*',
     'Content-Type': 'application/json;charset=utf-8',
     'Authorization': author,
-    't': token,
+    't':'VFZSWk5VOUVVVEJQUkZGNFRXYzlQUT09',
     'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
     'Referer': 'https://app.golike.net/account/manager/tiktok',
 }
-
 scraper = cloudscraper.create_scraper()
 
 def chonacc():
@@ -186,57 +209,56 @@ def countdown_delay(seconds, nickname, price_str, job_count, total, link, status
 def display_dashboard(nickname, price_str, job_count, total, link, status, delay_str):
     os.system('clear')  # Clear terminal
 
-    table = Table(title="📋 THÔNG TIN JOB GOLIKE", box=box.ROUNDED, border_style="bold white")
-    table.add_column("📌 Mục", justify="right", style="bold cyan")
-    table.add_column("📤 Thông tin", justify="left", style="bold magenta")
+    table = Table(title=" PHẠM QUANG DŨNG GOLIKE TIKTOK", box=box.ROUNDED, border_style="bold white")
+    table.add_column("📌 MỤC LỤC", justify="right", style="bold cyan")
+    table.add_column("📤 THÔNG TIN", justify="left", style="bold magenta")
 
-    table.add_row("👤 Nick TikTok", nickname)
-    table.add_row("💰 Giá", price_str)
-    table.add_row("✅ Job thành công", str(job_count))
-    table.add_row("💵 Tổng xu", str(total))
-    table.add_row("🔗 Link job", link)
-    table.add_row("📡 Trạng thái", status)
-    table.add_row("⏳ Delay", delay_str)
-
+    table.add_row("TÀI KHOẢN TIKTOK", nickname)
+    table.add_row("GIÁ XU", price_str)
+    table.add_row("JOB THÀNH CÔNG", str(job_count))
+    table.add_row("TỔNG XU NHẬN", str(total))
+    table.add_row("LINK JOB", link)
+    table.add_row("TRẠNG THÁI", status)
+    table.add_row("DELAY", delay_str)
     console.print(table)
-    console.print(Panel.fit("🌟 [bold green]Chúc bạn bào GoLike vắt cực khô 😆[bold green]", border_style="green"))
+    console.print(Panel.fit("[bold green]CHÚC BẠN THÀNH CÔNG [bold green]", border_style="green"))
 
 
 chontktiktok = chonacc()
 
 def dsacc():
     if chontktiktok.get("status") != 200:
-        print("\033[1;31m Authorization hoặc T sai\n")
+        print(f"{red}Authorization hoặc T sai\n")
         sys.exit(1)
     for i in range(len(chontktiktok["data"])):
-        print(f"\033[1;36m[{i+1}]\033[1;93m {chontktiktok['data'][i]['nickname']}")
+        print(f"{thanh}{luc}Nhập {red}[{vang}{i+1}{red}] {luc}ĐỂ CHẠY TÀI KHOẢN : {trang} {chontktiktok['data'][i]['nickname']}")
 
 dsacc()
-print(f"{Fore.MAGENTA}===================================")
+print(f"{trang}-----------------------------------------------------------------")
 
 while True:
     try:
-        luachon = int(input("\033[1;31mChọn tài khoản TIKTOK bạn muốn chạy : \033[1;33m"))
+        luachon = int(input(f"{thanh}{luc}Chọn tài khoản muốn chạy : {trang}"))
         if 1 <= luachon <= len(chontktiktok["data"]):
             account_id = chontktiktok["data"][luachon - 1]["id"]
             account_nickname = chontktiktok["data"][luachon - 1]["nickname"]
             break
-        print("\033[1;31mAcc không có trong danh sách. Nhập lại!")
+        print(f"{thanh}Acc không có trong danh sách. Nhập lại!")
     except:
         print("\033[1;31mSai Định Dạng")
 
 while True:
     try:
-        delay = int(input(f"\033[1;32mDelay thực hiện job : \033[1;33m"))
+        delay = int(input(f"{thanh}{luc}DELAY THỰC HIỆN JOB : {trang}"))
         if delay >= 0:
             break
-        print("\033[1;31mDelay phải là số không âm!")
+        print(f"{red}LỖI DELAY PHẢI LỚN ƠN 0")
     except:
-        print("\033[1;31mSai Định Dạng")
+        print(f"{red}LỖI RỒI ")
 
 while True:
     try:
-        doiacc = int(input(f"\033[1;32mThất bại bao nhiêu lần thì đổi acc tiktok : \033[1;33m"))
+        doiacc = int(input(f"{thanh}{luc}ĐỔI ACC SAU : {trang}"))
         if doiacc > 0:
             break
         print("\033[1;31mSố lần thất bại phải lớn hơn 0!")
