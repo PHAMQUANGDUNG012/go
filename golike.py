@@ -179,15 +179,15 @@ def checkauth(red, blue, green, yellow, cyan, magenta, orange, xanhnhat, xduong,
             xht = data.get('current_coin', 0)
             banner()
             pr(f'{thanh}{luc}TÊN TÀI KHOẢN : {trang}{name}')
-            pr(f'{thanh}{luc} XU HIỆN TẠI :{trang}{xht}VND')
-            pr(f'{thanh}{luc} XU CHỜ DUYỆT:{trang}{total_pending_coin}VND')
+            pr(f'{thanh}{luc}XU HIỆN TẠI : {trang}{xht }VND')
+            pr(f'{thanh}{luc}XU CHỜ DUYỆT : {trang}{total_pending_coin} VND')
 
             nicknames = [item['nickname'] for item in check['data'] if 'nickname' in item]
             print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
             pr(f'{thanh}{luc}ACC CÓ TRONG TÀI KHOẢN ')
             for i, nickname in enumerate(nicknames, start=1):
                 globals()[f'{i}'] = nickname
-                pr(f'{thanh}{luc}Nhập {red}[{vang}{i}{red}] {luc}Để chọn :{trang} {name}')
+                pr(f'{thanh}{luc}Nhập {red}[{vang}{i}{red}] {luc}Để chọn :{trang} {nickname}')
 
             with open("cache_golike_auth.txt", "w") as f:
                 f.write(auth)
