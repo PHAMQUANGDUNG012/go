@@ -11,7 +11,24 @@ from bs4 import BeautifulSoup
 import time
 from colorama import Fore, init
 import sys
-
+from datetime import date, datetime
+time=datetime.now().strftime("%H:%M:%S")
+data_machine = []
+today = date.today()
+now = datetime.now()
+thu = now.strftime("%A")
+ngay = now.strftime("%d")
+thang = now.strftime("%m")
+nam = now.strftime("%Y")
+red = "\033[1;31m"
+luc = "\033[1;32m"
+vang = "\033[1;33m"
+trang = "\033[1;37m"
+tim = "\033[1;35m"
+lam = "\033[1;36m"
+xduong = "\033[1;34m"
+thanh = f'{red}[{trang}</>{red}] {trang}=> '
+tentool="GOLIKE TIKTOK VIP"
 def kiem_tra_mang():
     try:
         socket.create_connection(("8.8.8.8", 53), timeout=3)
@@ -24,71 +41,62 @@ scraper = cloudscraper.create_scraper()
 from colorama import Fore
 
 banner = f"""
-{Fore.YELLOW}╔════════════════════════════════════════════════════════╗
-{Fore.YELLOW}║                                                        ║
-{Fore.YELLOW}║   \033[38;2;0;120;255m████████╗ ██████╗  ██████╗ ██╗     \033[0m{Fore.YELLOW}║
-{Fore.YELLOW}║   \033[38;2;0;140;255m╚══██╔══╝██╔═══██╗██╔═══██╗██║     \033[0m{Fore.YELLOW}║
-{Fore.YELLOW}║   \033[38;2;0;160;255m   ██║   ██║   ██║██║   ██║██║     \033[0m{Fore.YELLOW}║
-{Fore.YELLOW}║   \033[38;2;0;180;255m   ██║   ██║   ██║██║   ██║██║     \033[0m{Fore.YELLOW}║
-{Fore.YELLOW}║   \033[38;2;0;200;255m   ██║   ╚██████╔╝╚██████╔╝███████╗\033[0m{Fore.YELLOW}║
-{Fore.YELLOW}║   \033[38;2;0;220;255m   ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝\033[0m{Fore.YELLOW}║
-{Fore.YELLOW}║                                                        ║
-{Fore.YELLOW}╚════════════════════════════════════════════════════════╝
-{Fore.WHITE}════════════════════════════════════════════════════════════
-{Fore.RED}{Fore.WHITE}Phiên Bản: {Fore.YELLOW}TOOL_GOLIKE_TIKTOK_║ ADMIN: \033[38;2;0;220;255mVILÂM
-{Fore.WHITE}════════════════════════════════════════════════════════════
-[{Fore.RED}⚡{Fore.WHITE}] Zalo: \033[38;2;0;220;255m0368782618
-[{Fore.RED}⚡{Fore.WHITE}] Lưu ý: \033[38;2;0;220;255mAE dùng tool bị lỗi thì gọi ADMIN để sửa
-{Fore.WHITE}════════════════════════════════════════════════════════════
- TOOL này có lọc tài khoản riêng tư TIKTOK 
-{Fore.WHITE}════════════════════════════════════════════════════════════
-"""
+{lam}██████╗   ██████╗  ██████╗  ████████╗ ██████╗  ██████╗ ██╗     
+{trang}██ ╔═██╗ ██╔═══██╗ ██╔══██╗ ╚══██╔══╝██╔═══██╗██╔═══██╗██║     
+{lam}██████╔╝ ██║   ██║ ██║  ██║    ██║   ██║   ██║██║   ██║██║     
+{trang}██╔═══╝  ██║▄▄ ██║ ██║  ██║    ██║   ██║   ██║██║   ██║██║     
+{lam}██║      ╚██████╔╝ ██████╔╝    ██║   ╚██████╔╝╚██████╔╝███████╗
+{trang}╚═╝       ╚══▀▀═╝  ╚═════╝     ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝
+{trang}-----------------------------------------------------------------
+{thanh}{luc}Admin{trang} : {vang}Phạm Quang Dũng 
+{thanh}{luc}Zalo{trang} : {red}https://zalo.me/0336502026
+{thanh}{luc}Ngày Hôm Nay{trang} : {red}{ngay}/{thang}/{nam}
+{thanh}{luc}Giờ Hoạt Động{trang} : {red}{time}
+{thanh}{luc}Đang Sử Dụng{trang} : {vang}{tentool}
+{trang}-----------------------------------------------------------------"""
 os.system('cls' if os.name== 'nt' else 'clear')
 print(banner)
-print("\033[1;35m╔═════════════════════════════════╗")
-print("\033[1;35m║       \033[1;33m  ĐĂNG NHẬP GOLIKE        \033[1;35m║")
-print("\033[1;35m╚═════════════════════════════════╝") 
-    # Nhập auth
+#Nhập auth
 try:
   Authorization = open("Authorization.txt","x")
-  t = open("token.txt","x")
 except:
   pass
 Authorization = open("Authorization.txt","r")
-t = open("token.txt","r")
 author = Authorization.read()
-token = t.read()
 if author == "":
   author = input("\033[1;32mNHẬP AUTHORIZATION : \033[1;33m")
-  token = input("\033[1;32mNHẬP T (Token) : \033[1;33m")
   Authorization = open("Authorization.txt","w")
-  t = open("token.txt","w")
   Authorization.write(author)
-  t.write(token)
 else:
-  print(f"\033[1;32m       Nhấn Enter để vào TOOL")
-  print(f"\033[38;2;0;220;255m               HOẶC ")
-  select = input(f"\033[1;32mNhập AUTHORIZATION {Fore.RED}(tại đây) \033[1;32mđể vào acc khác: \033[1;33m")
+  print(f"{thanh}{luc}Nhập {red}[{vang}1{red}] {luc}Để Dùng Tài Khoản Cũ")
+  print(f"{thanh}{luc}Nhập {red}[{vang}2{red}] {luc}Để Dùng Tài Khoản Mới")
+  select = input(f"{thanh}{luc}Lựa Chọn Của Bạn Là : {trang}")
   kiem_tra_mang()
-  if select != "":
-    author = select
-    token = input("\033[1;32mNhập T (Token) : \033[1;33m")
-    Authorization = open("Authorization.txt","w")
-    t = open("token.txt","w")
-    Authorization.write(author)
-    t.write(token)
-Authorization.close()
-t.close()
+if select == "1":
+    if not author :
+        print(f"{red}lỗi hãy nhập lại\n")
+        sys.exit(1)
+elif select == "2":
+    os.system('cls' if os.name== 'nt' else 'clear')
+    print(banner)
+    author = input(f"{thanh}{luc}NHẬP AUTHORIZATION GOLIKE: ").strip()
+    try:
+        with open("Authorization.txt", "w") as Auth:
+            Auth.write(author)
+    except:
+        print("Hãy tạo file Authorization.txt \n")
+        sys.exit(1)
+else:
+    print(f"{thanh}Lựa chọn không hợp lệ! Vui lòng chọn 1 hoặc 2.")
+    sys.exit(1)
 os.system('cls' if os.name== 'nt' else 'clear')
 print(banner)
-print("\033[1;35m╔═════════════════════════════════╗")
-print("\033[1;35m║   \033[1;33m   DANH SÁCH ACC TIKTOK       \033[1;35m║")
-print("\033[1;35m╚═════════════════════════════════╝")  
+print(f"{thanh}{luc}DANH SÁCH ACC TRONG TÀI KHOẢN")
 headers = {
     'Accept': 'application/json, text/plain, */*',
     'Content-Type': 'application/json;charset=utf-8',
     'Authorization': author,
-    't': token,
+    't': 'VFZSWk5VOUVVVEJQUkZGNFRXYzlQUT09',
     'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
     'Referer': 'https://app.golike.net/account/manager/tiktok',
 }
@@ -166,52 +174,50 @@ def dsacc():
     print("\033[1;31mAuthorization hoăc T sai   ")
     quit()
   for i in range(len(chontktiktok["data"])):
-    print(f'\033[1;36m[{i+1}]\033[1;93m {chontktiktok["data"][i]["nickname"]} \033[1;97m|\033[1;31m\033[1;32m Hoạt Động')
+    print(f'{thanh}{luc}Nhập {red}[{vang}{i+1}{red}] {trang}{chontktiktok["data"][i]["nickname"]} ')
 dsacc() 
-print(f"{Fore.MAGENTA}═══════════════════════════════════")
+print(f"{trang}-----------------------------------------------------------------")
 while True:
   try:
-    luachon = int(input("\033[1;32mChọn tài khoản TIKTOK: \033[1;33m"))
+    luachon = int(input(f"{thanh}{luc}Chọn tài khoản TIKTOK : {trang}"))
     while luachon > len((chontktiktok)["data"]):
-      luachon = int(input("\033[1;32mAcc Này Không Có Trong Danh Sách , Nhập Lại : \033[1;33m"))
+      luachon = int(input(f"{thanh}{luc}Không Có Trong Danh Sách , Nhập Lại : {trang}"))
     account_id = chontktiktok["data"][luachon - 1]["id"]
     break  
   except:
-    print("\033[1;31mSai Định Dạng   ") 
+    print(f"{thanh}{red}Sai Định Dạng") 
 while True:
   try:
-    delay = int(input(f"\033[1;32mDelay: \033[1;33m"))
+    delay = int(input(f"{thanh}{luc}Delay :{trang} "))
     break
   except:
-    print("\033[1;31mSai Định Dạng  ")
+    print(f"{thanh}{red}Sai Định Dạng  ")
 while True:
   try: 
-    doiacc = int(input(f"\033[1;32mThất bại bao nhiêu lần thì đổi acc: \033[1;33m"))
+    doiacc = int(input(f"{thanh}{luc}Lỗi Bao Nhiêu Lần Đổi Acc :{trang} "))
     break
   except:
-    print("\033[1;31mNhập Vào 1 Số  ")  
-print("\033[1;35m╔═════════════════════════════════╗")
-print("\033[1;35m║     \033[1;33m  CHỌN LOẠI NHIỆM VỤ        \033[1;35m║")
-print("\033[1;35m╚═════════════════════════════════╝")
-print("\033[1;36m[1] \033[1;32mFollow")
-print("\033[1;36m[2] \033[1;32mLike")
-print("\033[1;36m[3] \033[1;32mCả hai (\033[1;33mFollow và Like\033[1;32m)")
+    print(f"{thanh}{luc}Nhập Vào 1 Số  ")
+os.system("cls" if os.name == "nt" else "clear")
+print(banner)  
+print(f"{thanh} {luc}Nhập {red}[{vang}1{red}] {luc}Để Chạy Followers")
+print(f"{thanh} {luc}Nhập {red}[{vang}2{red}] {luc}Để chạy Like")
+print(f"{thanh} {luc}Nhập {red}[{vang}3{red}] {luc}Follow và Like")
 while True:
     try:
-        loai_nhiem_vu = int(input("\033[1;32mChọn loại nhiệm vụ: \033[1;33m"))
+        loai_nhiem_vu = int(input(f"{thanh}{luc}Chọn loại nhiệm vụ : {trang}"))
         if loai_nhiem_vu in [1, 2, 3]:
             break
         else:
-            print("\033[1;31mVui lòng chọn số từ 1 đến 3!")
+            print(f"{thanh}{luc}Vui lòng chọn số từ 1 đến 3")
     except:
-        print("\033[1;31mSai định dạng! Vui lòng nhập số.")  
+        print(f"{thanh}{luc}Vui lòng nhập số.")  
 x_like, y_like, x_follow, y_follow = None, None, None, None
-print("\033[1;35m╔═════════════════════════════════╗")
-print("\033[1;35m║       \033[1;33m  ADB tự động             \033[1;35m║")
-print("\033[1;35m╚═════════════════════════════════╝")
-print(f"\033[1;36m[1] Có")
-print(f"\033[1;36m[2] Không")
-adbyn = input(f"\033[1;32mNhập lựa chọn: \033[1;33m")
+os.system("cls" if os.name == "nt" else "clear")
+print(banner)
+print(f"{thanh}{luc}Nhập {red}[{vang}1{red}] {luc}Chạy ADB tự động")
+print(f"{thanh}{luc}Nhập {red}[{vang}2{red}] {luc}Không Chạy ADB tự động ")
+adbyn = input(f"{thanh}{luc}Nhập lựa chọn : {trang}")
 if adbyn == "1":
     def setup_adb():
       config_file = "adb_config.txt"
@@ -220,8 +226,8 @@ if adbyn == "1":
     # Nhập IP và port ADB
       print(f"{Fore.MAGENTA}═══════════════════════════════════")
       
-      ip = input("\033[1;32mNhập IP của thiết bị ví dụ (192.168.1.2): \033[1;33m")
-      adb_port = input("\033[1;32mNhập port của thiết bị ví dụ (39327): \033[1;33m")
+      ip = input(f"{thanh}{luc}Nhập IP của thiết bị {red}({trang}192.168.1.2{red}) : {trang}")
+      adb_port = input(f"{thanh}{luc}Nhập port của thiết bị {red}({trang}39327{red}) : {trang}")
       # Kiểm tra và đọc tọa độ từ file nếu tồn tại
       x_like, y_like, x_follow, y_follow = None, None, None, None    
       if os.path.exists(like_coords_file):
@@ -229,31 +235,30 @@ if adbyn == "1":
               coords = f.read().split("|")
               if len(coords) == 2:
                    x_like, y_like = coords
-                   print(f"\033[1;32mĐã tìm thấy tọa độ nút tim: X={x_like}, Y={y_like}")    
+                   print(f"{thanh}{luc}Đã tìm thấy tọa độ nút tim : {trang}X ={vang}{x_like} {trang}Y ={vang}{y_like}")    
       if os.path.exists(follow_coords_file):
           with open(follow_coords_file, "r") as f:
                coords = f.read().split("|")
                if len(coords) == 2:
                    x_follow, y_follow = coords
-                   print(f"\033[1;32mĐã tìm thấy tọa độ nút follow: X={x_follow}, Y={y_follow}")
+                   print(f"{thanh}{luc}Đã tìm thấy tọa độ nút follow :{trang} X = {vang}{x_follow} {trang}Y = {vang}{y_follow}")
       if not os.path.exists(config_file):
-           print("\033[1;36mLần đầu chạy, nhập mã ghép nối (6 SỐ) và port ghép nối.\033[0m")
-           pair_code = input("\033[1;32mNhập mã ghép nối 6 số ví dụ (322763): \033[1;33m")
-           pair_port = input("\033[1;32mNhập port ghép nối ví dụ (44832): \033[1;33m")
+           pair_code = input(f"{thanh}{luc}Nhập mã ghép nối 6 số {red}({trang}322763{red}) {trang}: ")
+           pair_port = input(f"{thanh}{luc}Nhập port ghép nối {red}({trang}44832{red}) {trang}: ")
            with open(config_file, "w") as f:
                f.write(f"{pair_code}|{pair_port}")
       else:
           with open(config_file, "r") as f:
                pair_code, pair_port = [s.strip() for s in f.read().split("|")]  
-      print("\n\033[1;36m  Đang ghép nối với thiết bị\033[0m")
+      print(f"\n {thanh}{tim}Đang ghép nối với thiết bị")
       os.system(f"adb pair {ip}:{pair_port} {pair_code}")
       time.sleep(2)  
-      print("\033[1;36m  Đang kết nối ADB\033[0m")
+      print(f"{thanh}{luc}Đang kết nối ADB\033[0m")
       os.system(f"adb connect {ip}:{adb_port}")
       time.sleep(2)  
       devices = os.popen("adb devices").read()
       if ip not in devices:
-        print(f"{Fore.RED} Kết nối thất bại{Fore.WHITE}")
+        print(f"{thanh}{red}Kết nối thất bại")
         exit()    
        # Yêu cầu nhập tọa độ nếu chưa có
       print("\033[1;35m╔═════════════════════════════════╗")
@@ -282,9 +287,6 @@ dsaccloi = []
 accloi = ""
 os.system('cls' if os.name== 'nt' else 'clear')
 print(banner)
-print("\033[1;37m════════════════════════════════════════════════════════════")
-print("\033[1;31m| \033[1;36mSTT \033[1;37m| \033[1;33mThời gian \033[1;37m| \033[1;32mStatus \033[1;37m| \033[1;31mType job \033[1;37m| \033[1;32mID Acc \033[1;37m| \033[1;32mXu \033[1;37m| \033[1;33mTổng       ")
-print("\033[1;37m════════════════════════════════════════════════════════════")
 while True:
     if checkdoiacc == doiacc:
         dsaccloi.append(chontktiktok["data"][luachon - 1]["nickname"])
@@ -295,9 +297,9 @@ while True:
         while True:
             try:
                 print(f"{Fore.WHITE}════════════════════════════════════════════════════")
-                luachon = int(input("\033[1;32mChọn tài khoản mới: \033[1;33m"))
+                luachon = int(input(f"{thanh}{luc}Chọn tài khoản mới {trang}: "))
                 while luachon > len((chontktiktok)["data"]):
-                    luachon = int(input("\033[1;31mAcc Này Không Có Trong Danh Sách, Hãy Nhập Lại : \033[1;33m"))
+                    luachon = int(input(f"{thanh}{luc}Acc Này Không Trong Danh Sách, Hãy Nhập Lại : \033[1;33m"))
                 account_id = chontktiktok["data"][luachon - 1]["id"]
                 checkdoiacc = 0
                 os.system('cls' if os.name== 'nt' else 'clear')
@@ -306,7 +308,7 @@ while True:
                 break  
             except:
                 print("\033[1;31mSai Định Dạng !!!")
-    print('\033[1;35mĐang Tìm Nhiệm Vụ', end="\r")
+    print(f'{luc}Đang Tìm Nhiệm Vụ        ', end="\r")
     max_retries = 3
     retry_count = 0
     nhanjob = None
@@ -353,11 +355,11 @@ while True:
         os.system(f"adb shell input tap {x_follow} {y_follow}")
     # Đếm ngược delay
     for remaining_time in range(delay, -1, -1):
-        color = "\033[1;36m" if remaining_time % 2 == 0 else "\033[1;33m"
-        print(f"\r{color}| TOOL-VIP | {remaining_time}s           ", end="")
+        color = "\033[1;36m" if remaining_time % 2 == 0 else "\033[1;37m"
+        print(f"\r{color}| PQD-TOOL | {remaining_time}s |          ", end="")
         time.sleep(1)    
     print("\r                          \r", end="") 
-    print("\033[1;35mĐang Nhận Tiền    ",end = "\r")
+    print(f"{luc}Đang Nhận Tiền          ",end = "\r")
     # Hoàn thành job
     max_attempts = 2
     attempts = 0
@@ -389,13 +391,11 @@ while True:
         if second < 10:
             s = "0" + str(second)
                                       
-        job_label = f"JOB {job_type.upper()}"
-        chuoi = (f"[1;35m[[1;31m{dem}[1;35m]"
-                 f" [1;35m[[1;32m{job_label}[1;35m]"
-                 f" [1;35m[[38;2;0;180;255m{job_type}[1;35m]"
-                 f" [1;35m[[1;33m+{tien}[1;35m]"
-                 f" [1;35m[[1;33mTổng: {tong}[1;35m]"
-                 f" [1;35m[[1;37mTime: {h}:{m}:{s}[1;35m]")
+        chuoi = (f"{tim}[ {lam}{dem}{tim} ]"
+                 f"{tim}[{trang} {h}:{m}:{s} {tim}]"                 
+                 f"{tim}[ {job_type} ]"
+                 f"{tim}[{vang} +{tien} VND {tim}]"
+                 f"{tim}[{vang} {tong} VND {tim}] [{luc}THÀNH CÔNG]")
 
         print("                                                    ", end="\r")
         print(chuoi)
@@ -405,7 +405,7 @@ while True:
         try:
             baoloi(ads_id, object_id, account_id, nhanjob["data"]["type"])
             print("                                              ", end="\r")
-            print("\033[1;31m🚀 Bỏ qua nhiệm vụ ", end="\r")
+            print(f"{thanh}{luc}Bỏ qua nhiệm vụ ", end="\r")
             sleep(1)
             checkdoiacc += 1
         except:
