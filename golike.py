@@ -252,10 +252,10 @@ if adbyn == "1":
                pair_code, pair_port = [s.strip() for s in f.read().split("|")]  
       print(f"\n {thanh}{tim}Đang ghép nối với thiết bị")
       os.system(f"adb pair {ip}:{pair_port} {pair_code}")
-      time.sleep(2)  
+      sleep(2)  
       print(f"{thanh}{luc}Đang kết nối ADB\033[0m")
       os.system(f"adb connect {ip}:{adb_port}")
-      time.sleep(2)  
+      sleep(2)  
       devices = os.popen("adb devices").read()
       if ip not in devices:
         print(f"{thanh}{red}Kết nối thất bại")
@@ -319,10 +319,10 @@ while True:
                 break
             else:
                 retry_count += 1
-                time.sleep(2)
+                sleep(2)
         except Exception as e:
             retry_count += 1
-            time.sleep(1)
+            sleep(1)
     if not nhanjob or retry_count >= max_retries:
         continue
     ads_id = nhanjob["data"]["id"]
@@ -399,7 +399,7 @@ while True:
 
         print("                                                    ", end="\r")
         print(chuoi)
-        time.sleep(0.7)
+        sleep(0.7)
         checkdoiacc = 0
     else:
         try:
