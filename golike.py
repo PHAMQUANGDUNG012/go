@@ -1,4 +1,4 @@
-
+#tao là phạm quang dũng
 import json
 import os,time
 import cloudscraper
@@ -13,7 +13,6 @@ import time
 from colorama import Fore, init
 import sys
 from datetime import date, datetime
-time=datetime.now().strftime("%H:%M:%S")
 data_machine = []
 today = date.today()
 now = datetime.now()
@@ -52,7 +51,6 @@ banner = f"""
 {thanh}{luc}Admin{trang} : {vang}Phạm Quang Dũng 
 {thanh}{luc}Zalo{trang} : {red}https://zalo.me/0336502026
 {thanh}{luc}Ngày Hôm Nay{trang} : {red}{ngay}/{thang}/{nam}
-{thanh}{luc}Giờ Hoạt Động{trang} : {red}{time}
 {thanh}{luc}Đang Sử Dụng{trang} : {vang}{tentool}
 {trang}-----------------------------------------------------------------"""
 os.system('cls' if os.name== 'nt' else 'clear')
@@ -253,10 +251,10 @@ if adbyn == "1":
                pair_code, pair_port = [s.strip() for s in f.read().split("|")]  
       print(f"\n {thanh}{tim}Đang ghép nối với thiết bị")
       os.system(f"adb pair {ip}:{pair_port} {pair_code}")
-      sleep(2)  
+      time.sleep(2)  
       print(f"{thanh}{luc}Đang kết nối ADB\033[0m")
       os.system(f"adb connect {ip}:{adb_port}")
-      sleep(2)  
+      time.sleep(2)  
       devices = os.popen("adb devices").read()
       if ip not in devices:
         print(f"{thanh}{red}Kết nối thất bại")
@@ -320,10 +318,10 @@ while True:
                 break
             else:
                 retry_count += 1
-                sleep(2)
+                time.sleep(2)
         except Exception as e:
             retry_count += 1
-            sleep(1)
+            time.sleep(1)
     if not nhanjob or retry_count >= max_retries:
         continue
     ads_id = nhanjob["data"]["id"]
@@ -400,14 +398,14 @@ while True:
 
         print("                                                    ", end="\r")
         print(chuoi)
-        sleep(0.7)
+        time.sleep(0.7)
         checkdoiacc = 0
     else:
         try:
             baoloi(ads_id, object_id, account_id, nhanjob["data"]["type"])
             print("                                              ", end="\r")
             print(f"{thanh}{luc}Bỏ qua nhiệm vụ ", end="\r")
-            sleep(1)
+            time.sleep(1)
             checkdoiacc += 1
         except:
             pass
