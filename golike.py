@@ -1,4 +1,3 @@
-#tao là phạm quang dũng
 import json
 import os,time
 import cloudscraper
@@ -13,6 +12,23 @@ import time
 from colorama import Fore, init
 import sys
 from datetime import date, datetime
+from rich.console import Console
+from rich.table import Table
+
+console = Console()
+
+def hien_thi_thong_tin(dem, h,m,s, job_type,tien,tong):
+    console.rule("[bold green]📌 THÔNG TIN LÀM JOB ", style="cyan")
+    table = Table(show_header=False, box=None, expand=True)
+    table.add_row("SỐ LẦN LÀM :", f"[bold yellow]{dem}[/bold yellow]")
+    table.add_row("THỜI GIAN LÀM :", f"[bold white]{h}:{m}:{s}[/bold green]")
+    table.add_row("LÀM NHIỆM VỤ :", f"[bold cyan]{job_type}[/bold cyan]")
+    table.add_row("XU NHẬN ĐƯỢC :", f"[bold yellow]+{tien}[/bold cyan]")
+    table.add_row("TỔNG XU NHẬN :", f"[bold yellow]{tong}[/bold cyan]")
+    table.add_row("TRẠNG THÁI JOB :", f"[bold gree]THÀNH CÔNG[/bold cyan]")
+    console.print(table)
+    console.rule()
+
 data_machine = []
 today = date.today()
 now = datetime.now()
@@ -390,14 +406,17 @@ while True:
         if second < 10:
             s = "0" + str(second)
                                       
-        chuoi = (f"{tim}[ {lam}{dem}{tim} ]"
-                 f"{tim}[{trang} {h}:{m}:{s} {tim}]"                 
-                 f"{tim}[ {job_type} ]"
-                 f"{tim}[{vang} +{tien} VND {tim}]"
-                 f"{tim}[{vang} {tong} VND {tim}] [{luc}THÀNH CÔNG]")
-
-        print("                                                    ", end="\r")
-        print(chuoi)
+        #chuoi = (f"{tim}[ {lam}{dem}{tim} ]"
+#f"{tim}[{trang} {h}:{m}:{s} {tim}]"                 
+#                 f"{tim}[ {job_type} ]"
+#                 f"{tim}[{vang} +{tien} VND {tim}]"
+#                 f"{tim}[{vang} {tong} VND {tim}] [{luc}THÀNH CÔNG]")
+#
+#        print("                                                    ", end="\r")
+#        print(chuoi)
+        os.system('cls' if os.name== 'nt' else 'clear')
+        print(banner)
+        hien_thi_thong_tin(dem, h,m,s, job_type,tien,tong)
         time.sleep(0.7)
         checkdoiacc = 0
     else:
