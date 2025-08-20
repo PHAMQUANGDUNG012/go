@@ -1,5 +1,4 @@
 import json
-#đã có chỉnh sửa
 import os,time
 import cloudscraper
 import requests
@@ -354,8 +353,8 @@ while True:
         os.system(f"adb shell input tap {x_follow} {y_follow}")
     # Đếm ngược delay
     for remaining_time in range(delay, -1, -1):
-        color = "\033[1;36m" if remaining_time % 2 == 0 else "\033[1;37m"
-        print(f"\r{color}| PQD-TOOL | {remaining_time}s |          ", end="")
+        color = "\033[1;33m" if remaining_time % 2 == 0 else "\033[1;37m"
+        print(f"\r{trang}[{lam}PQD-TOOL{trang}] [{lam}DELAY{trang}] [{color} {remaining_time}s {trang}]          ", end="")
         time.sleep(1)    
     print("\r                          \r", end="") 
     print(f"{luc}Đang Nhận Tiền          ",end = "\r")
@@ -400,7 +399,8 @@ while True:
 {tim}║ {trang}TRẠNG THÁI {tim}║║{thanh} {luc}THÀNH CÔNG
 {tim}╚════════════╝╚═════════════════════╝
 ''')
-        print("                                                    ", end="\r")
+        os.system('cls' if os.name== 'nt' else 'clear')
+        print(banner)        
         print(chuoi)
         time.sleep(0.7)
         checkdoiacc = 0
